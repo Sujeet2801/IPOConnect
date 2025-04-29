@@ -1,0 +1,42 @@
+{
+  "name": "ipo-connect-sever",
+  "version": "1.0.0",
+  "description": "A node.js app for managing ipos efficiently and robust authentication system ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "ipo",
+    "initial public offering",
+    "ipo market",
+    "ipo insights",
+    "stock market",
+    "investing",
+    "investor data",
+    "sector analysis",
+    "brokerage firms",
+    "financial data",
+    "stock investing",
+    "market research",
+    "ipo tracking",
+    "ipo calendar",
+    "stock market analysis",
+    "investment platform",
+    "ipo research",
+    "finance",
+    "equity market",
+    "ipo platform"
+  ],
+  "author": "Sujeet Kumar Gupta <sujeetgupta2801@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
