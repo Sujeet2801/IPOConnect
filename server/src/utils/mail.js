@@ -76,7 +76,7 @@ const forgotPasswordMailGenContent = (name, resetUrl) => ({
 });
 
 const sendVerificationEmail = async ({ email, name, verificationToken }) => {
-    const verificationUrl = `${process.env.BASE_URL}/api/v1/verify/${verificationToken}`;
+    const verificationUrl = `${process.env.BASE_URL}/api/v1/users/verify/${verificationToken}`;
     const maxRetries = 3;
     let attempt = 0;
 
