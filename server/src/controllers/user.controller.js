@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { UserRole } from '../generated/prisma/index.js'
 import jwt from 'jsonwebtoken'
-import { sendVerificationEmail } from '../utils/mail.js'
+import { resendVerificationEmail, sendVerificationEmail } from '../utils/mail.js'
 import { ApiResponse } from '../utils/api-response.js'
 
 const registerUserController = asyncHandler( async (req, res) => {
@@ -79,7 +79,62 @@ const verifyEmailController = asyncHandler( async (req, res) => {
     return res.status(200).json(new ApiResponse(200, {}, "Email verified successfully"));
 });
 
+const loginUserController = asyncHandler( async (req, res) => {
+
+    const { email, password } = req.body;
+
+    // 1. Validate input
+    if (!email || !password) {
+        return res.status(400).json(new ApiError(400, "Email and password are required"));
+    }
+
+    // 2. Check if user exists
+    const existingUser = await db.user.findUnique({ where: { email } });
+    if (!existingUser) {
+        return res.status(404).json(new ApiError(404, "User not found"));
+    }
+
+    // 3. Compare password
+    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+    if (!isPasswordValid) {
+        return res.status(401).json(new ApiError(401, "Invalid email or password"));
+    }
+
+    // 4. Check email verification
+    if (!existingUser.isEmailVerified) {
+        return res.status(403)
+                .json(new ApiError(403, "Email not verified. Please verify your email to continue."));
+    }
+
+    // 5. Generate JWT token
+    const token = jwt.sign(
+        { id: existingUser.id },
+        process.env.JWT_SECRET,
+        { expiresIn: "7d" }
+    );
+
+    // 6. Set token in HTTP-only cookie
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    return res.status(200).json(
+        new ApiResponse(200, { user: existingUser, token }, "Login successful")
+    );
+});
+
+const logoutUserController = asyncHandler( async (req, res) => {
+    res.clearCookie("token");
+    res.status(200).json(new ApiResponse(200, {}, "Logout successful"));
+});
+
 export { 
     registerUserController,
     verifyEmailController,
+    loginUserController,
+    logoutUserController,
 };
