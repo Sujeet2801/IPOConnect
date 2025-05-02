@@ -8,24 +8,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// --------------------------------------
+// ENUMS
+// --------------------------------------
+
+// Defines roles assigned to users of the platform.
 enum UserRole {
   ADMIN
   USER
 }
 
+// Enum to track the current lifecycle stage of an IPO.
+enum IpoStatus {
+  UPCOMING   /// IPO has been announced but is not yet open for subscription.
+  ONGOING    /// IPO is currently open for subscription.
+  LISTED     /// IPO has been listed on the stock exchange.
+}
+
+// --------------------------------------
+// MODELS
+// --------------------------------------
+
+// Represents a registered user of the platform.
 model User {
-  id                      String   @id @default(uuid())
+  id                      String    @id @default(uuid())
   name                    String?
-  email                   String   @unique
+  email                   String    @unique
   password                String
-  phone                   String   @unique
-  isEmailVerified         Boolean  @default(false)
+  phone                   String    @unique
+  isEmailVerified         Boolean   @default(false)
   emailVerificationToken  String?
   emailVerificationExpiry DateTime?
   forgotPasswordToken     String?
   forgotPasswordExpiry    DateTime?
   refreshToken            String?
-  role                    UserRole @default(USER)
-  createdAt               DateTime @default(now())
-  updatedAt               DateTime @updatedAt
+  role                    UserRole  @default(USER)
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+}
+
+// Represents an IPO (Initial Public Offering) listing.
+model Ipo {
+  id           String     @id @default(uuid())
+  companyName  String     @unique
+  priceBand    String
+  openDate     DateTime
+  closeDate    DateTime
+  issueSize    String
+  issueType    String
+  listingDate  DateTime
+  status       IpoStatus
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
