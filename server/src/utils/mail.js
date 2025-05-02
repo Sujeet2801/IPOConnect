@@ -75,7 +75,9 @@ const forgotPasswordMailGenContent = (name, resetUrl) => ({
     },
 });
 
+// Send verification email
 const sendVerificationEmail = async ({ email, name, verificationToken }) => {
+
     const verificationUrl = `${process.env.BASE_URL}/api/v1/users/verify/${verificationToken}`;
     const maxRetries = 3;
     let attempt = 0;
@@ -94,10 +96,68 @@ const sendVerificationEmail = async ({ email, name, verificationToken }) => {
             console.warn(`Attempt ${attempt} failed:`, error.message);
     
             if (attempt >= maxRetries) {
-            throw new ApiError(500, "Failed to send verification email after multiple attempts.");
+                throw new ApiError(500, "Failed to send verification email after multiple attempts.");
             }
 
             // Exponential backoff
+            const backoff = 500 * 2 ** (attempt - 1);
+            await new Promise(res => setTimeout(res, backoff));
+        }
+    }
+};
+
+// Resend verification email
+const resendVerificationEmail = async ({ email, name, verificationToken }) => {
+
+    const verificationUrl = `${process.env.BASE_URL}/api/v1/users/verify/${verificationToken}`;
+    const maxRetries = 3;
+    let attempt = 0;
+
+    while (attempt < maxRetries) {
+        try {
+            await sendMail({
+                email,
+                subject: "Resend Verification - IPOConnect",
+                mailGenContent: emailVerificationMailGenContent(name || "User", verificationUrl),
+            });
+            console.log("Resend verification email sent successfully.");
+            break;
+        } catch (error) {
+            attempt++;
+            console.warn(`Resend attempt ${attempt} failed:`, error.message);
+
+            if (attempt >= maxRetries) {
+                throw new ApiError(500, "Failed to resend verification email after multiple attempts.");
+            }
+
+            const backoff = 500 * 2 ** (attempt - 1);
+            await new Promise(res => setTimeout(res, backoff));
+        }
+    }
+};
+
+const sendForgotPasswordEmail = async ({ email, name, resetToken }) => {
+    const resetUrl = `${process.env.BASE_URL}/api/v1/users/reset-password/${resetToken}`;
+    const maxRetries = 3;
+    let attempt = 0;
+
+    while (attempt < maxRetries) {
+        try {
+            await sendMail({
+                email,
+                subject: "Password Reset - IPOConnect",
+                mailGenContent: forgotPasswordMailGenContent(name || "User", resetUrl),
+            });
+            console.log("Password reset email sent successfully.");
+            break;
+        } catch (error) {
+            attempt++;
+            console.warn(`Reset email attempt ${attempt} failed:`, error.message);
+
+            if (attempt >= maxRetries) {
+                throw new ApiError(500, "Failed to send password reset email after multiple attempts.");
+            }
+
             const backoff = 500 * 2 ** (attempt - 1);
             await new Promise(res => setTimeout(res, backoff));
         }
@@ -108,5 +168,7 @@ export {
     sendMail,
     emailVerificationMailGenContent,
     forgotPasswordMailGenContent,
-    sendVerificationEmail
+    sendVerificationEmail,
+    resendVerificationEmail,
+    sendForgotPasswordEmail
 };
