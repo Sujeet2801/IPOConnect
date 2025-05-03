@@ -6,6 +6,7 @@ import cors from "cors";
 // All routes imports
 import healthCheckRoutes from './routes/healthCheck.route.js'
 import userRoutes from './routes/user.route.js'
+import ipoRoutes from './routes/ipo.routes.js'
 
 dotenv.config({
     path: "./.env",
@@ -26,6 +27,7 @@ app.use(
 // All Routes
 app.use("/api/v1/users", healthCheckRoutes)
 app.use("/api/v1/users", userRoutes)
+app.use("/api/v1/users", ipoRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
