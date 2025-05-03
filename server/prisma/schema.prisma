@@ -20,9 +20,9 @@ enum UserRole {
 
 // Enum to track the current lifecycle stage of an IPO.
 enum IpoStatus {
-  UPCOMING   /// IPO has been announced but is not yet open for subscription.
-  ONGOING    /// IPO is currently open for subscription.
-  LISTED     /// IPO has been listed on the stock exchange.
+  UPCOMING /// IPO has been announced but is not yet open for subscription.
+  ONGOING /// IPO is currently open for subscription.
+  LISTED /// IPO has been listed on the stock exchange.
 }
 
 // --------------------------------------
@@ -49,15 +49,15 @@ model User {
 
 // Represents an IPO (Initial Public Offering) listing.
 model Ipo {
-  id           String     @id @default(uuid())
-  companyName  String     @unique
-  priceBand    String
-  openDate     DateTime
-  closeDate    DateTime
-  issueSize    String
-  issueType    String
-  listingDate  DateTime
-  status       IpoStatus
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id          String    @id @default(uuid())
+  companyName String    @unique
+  priceBand   String
+  openDate    DateTime
+  closeDate   DateTime
+  issueSize   String
+  issueType   String
+  listingDate DateTime
+  status      IpoStatus
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
