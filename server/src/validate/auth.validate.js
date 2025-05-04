@@ -15,6 +15,8 @@ const userRegistrationValidator = () => {
         body("phone")
             .trim()
             .notEmpty().withMessage("Phone no is required")
+            .isNumeric().withMessage("Phone number must contain only digits.")
+            .isLength({ min: 10, max: 10 }).withMessage("Phone number must be exactly 10 digits.")
     ]
 }
 
