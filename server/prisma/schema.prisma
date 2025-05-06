@@ -70,3 +70,15 @@ model Blog {
   publishDate  DateTime @default(now())
   externalLink String
 }
+
+// The Sector model represents a industry sector with structured market data.
+model Sector {
+  id             String   @id @default(uuid())
+  sectorName     String   @unique
+  sectorDesc     String
+  marketCaps     Json
+  marketInsights Json
+  opportunities  Json
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
