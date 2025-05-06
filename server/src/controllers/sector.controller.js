@@ -47,13 +47,13 @@ const updateSectorController = asyncHandler( async (req, res) => {
     }
 
     const updatedSector = await db.sector.update({
-        where: { sectorName },
+        where: { sectorName: sectorNameFromParams },
         data: {
-            sectorName,
-            sectorDesc,
-            marketCaps,
-            marketInsights,
-            opportunities,
+            sectorName: sectorName || existingSector.sectorName,
+            sectorDesc: sectorDesc || existingSector.sectorDesc,
+            marketCaps: marketCaps || existingSector.marketCap,
+            marketInsights: marketInsights || existingSector.marketInsights,
+            opportunities: opportunities || existingSector.opportunities,
         },
     });
 
@@ -69,6 +69,8 @@ const getAllSectorController = asyncHandler( async (req, res) => {
 const getSectorsByMarketCapTypeController = asyncHandler(async (req, res) => {
 
     const { type } = req.params;
+    console.log(type);
+    
     const allowedTypes = ['large', 'mid', 'small'];
 
     if (!allowedTypes.includes(type)) {
@@ -97,7 +99,8 @@ const getSectorsByMarketCapTypeController = asyncHandler(async (req, res) => {
 
 const deleteSectorController = asyncHandler(async (req, res) => {
 
-    const { sectorName } = req.params;
+    let { sectorName } = req.params;
+    sectorName = sectorName.replace(/-/g, " ")
 
     const existingSector = await db.sector.findUnique({ where: { sectorName } });
     if (!existingSector) {
