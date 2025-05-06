@@ -8,6 +8,7 @@ import healthCheckRoutes from './routes/healthCheck.route.js'
 import userRoutes from './routes/user.route.js'
 import ipoRoutes from './routes/ipo.route.js'
 import blogRoutes from './routes/blog.route.js'
+import sectorRoutes from './routes/sector.route.js'
 
 dotenv.config({
     path: "./.env",
@@ -30,6 +31,7 @@ app.use("/api/v1/users", healthCheckRoutes)
 app.use("/api/v1/users", userRoutes)
 app.use("/api/v1/users", ipoRoutes)
 app.use("/api/v1/users", blogRoutes)
+app.use("/api/v1/users", sectorRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
