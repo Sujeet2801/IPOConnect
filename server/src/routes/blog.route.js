@@ -1,11 +1,22 @@
 import { Router } from "express";
-import {createBlogController, deleteBlogController, getAllBlogController, updateBlogController } from "../controllers/blog.controller.js";
+import { createBlogController, updateBlogController, deleteBlogController, getAllBlogController
+    } from "../controllers/blog.controller.js";
+import { isAuthenticated } from "../middlewares/auth.middleware.js";
+import { authorizeRoles } from "../middlewares/authRole.middleware.js";
+import { blogValidationRules } from "../validators/blog.validate.js";
+import { validate } from "../middlewares/validate.middleware.js"
 
 const router = Router();
 
-router.post("/blog", createBlogController)
-router.put("/blog/:titleParams", updateBlogController)
-router.delete("/blog/:title", deleteBlogController)
-router.get("/blogs", getAllBlogController)
+router.route("/blog")
+    .post( isAuthenticated, authorizeRoles("ADMIN"), blogValidationRules(), validate, createBlogController);
+
+router.route("/blog/:titleParams")
+    .put( isAuthenticated, authorizeRoles("ADMIN"), updateBlogController);
+
+router.route("/blog/:title")
+    .delete( isAuthenticated, authorizeRoles("ADMIN"), deleteBlogController);
+
+router.get("/blogs", getAllBlogController);
 
 export default router;
