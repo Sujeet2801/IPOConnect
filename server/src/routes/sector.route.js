@@ -3,7 +3,7 @@ import { createSectorController, updateSectorController, getAllSectorController,
 getSectorsByMarketCapTypeController, deleteSectorController } from "../controllers/sector.controller.js";
 import { isAuthenticated } from "../middlewares/auth.middleware.js";
 import { authorizeRoles } from "../middlewares/authRole.middleware.js";
-import { sectorValidationRules } from "../validate/sector.validate.js";
+import { sectorValidationRules } from "../validators/sector.validate.js";
 import { validate } from "../middlewares/validate.middleware.js";
 
 const router = Router();
