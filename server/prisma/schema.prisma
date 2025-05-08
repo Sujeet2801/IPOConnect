@@ -82,3 +82,19 @@ model Sector {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model SharkInvestor {
+  id                 String   @id @default(uuid())
+  imageUrl           String
+  sharkName          String   @unique
+  description        String
+  netWorth           String
+  portfolio          String
+  sectorFocus        Json
+  stageFocus         Json
+  notableInvestments Json
+  achievements       Json
+  smLink             Json
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
