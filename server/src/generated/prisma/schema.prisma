@@ -8,11 +8,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// --------------------------------------
+// ENUMS
+// --------------------------------------
+
+// Defines roles assigned to users of the platform.
 enum UserRole {
   ADMIN
   USER
 }
 
+// Enum to track the current lifecycle stage of an IPO.
+enum IpoStatus {
+  UPCOMING
+  ONGOING
+  LISTED
+}
+
+// --------------------------------------
+// MODELS
+// --------------------------------------
+
+// Represents a registered user of the platform.
 model User {
   id                      String    @id @default(uuid())
   name                    String?
@@ -28,4 +45,74 @@ model User {
   role                    UserRole  @default(USER)
   createdAt               DateTime  @default(now())
   updatedAt               DateTime  @updatedAt
+}
+
+// Represents an IPO (Initial Public Offering) listing.
+model Ipo {
+  id          String    @id @default(uuid())
+  companyName String    @unique
+  priceBand   String
+  openDate    DateTime
+  closeDate   DateTime
+  issueSize   String
+  issueType   String
+  listingDate DateTime
+  status      IpoStatus
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// The Blog model represents an individual blog post entry.
+model Blog {
+  id           String   @id @default(uuid())
+  title        String   @unique
+  imageUrl     String
+  publishDate  DateTime @default(now())
+  externalLink String
+}
+
+// The Sector model represents a industry sector with structured market data.
+model Sector {
+  id             String   @id @default(uuid())
+  sectorName     String   @unique
+  sectorDesc     String
+  marketCaps     Json
+  marketInsights Json
+  opportunities  Json
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model SharkInvestor {
+  id                 String   @id @default(uuid())
+  imageUrl           String
+  sharkName          String   @unique
+  description        String
+  netWorth           String
+  portfolio          String
+  sectorFocus        Json
+  stageFocus         Json
+  notableInvestments Json
+  achievements       Json
+  smLink             Json
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Broker {
+  id                 String   @id @default(cuid())
+  companyName        String   @unique
+  companyLogo        String
+  ratings            Float
+  reviews            Float
+  accounts           String
+  openAccLink        String
+  learnMore          String
+  tradingCategory    String[]
+  accOpenCharge      String
+  maintainanceCharge String
+  deliveryCharge     String
+  intradayBrokerage  String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }

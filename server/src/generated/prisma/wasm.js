@@ -137,9 +137,80 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.IpoScalarFieldEnum = {
+  id: 'id',
+  companyName: 'companyName',
+  priceBand: 'priceBand',
+  openDate: 'openDate',
+  closeDate: 'closeDate',
+  issueSize: 'issueSize',
+  issueType: 'issueType',
+  listingDate: 'listingDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  imageUrl: 'imageUrl',
+  publishDate: 'publishDate',
+  externalLink: 'externalLink'
+};
+
+exports.Prisma.SectorScalarFieldEnum = {
+  id: 'id',
+  sectorName: 'sectorName',
+  sectorDesc: 'sectorDesc',
+  marketCaps: 'marketCaps',
+  marketInsights: 'marketInsights',
+  opportunities: 'opportunities',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SharkInvestorScalarFieldEnum = {
+  id: 'id',
+  imageUrl: 'imageUrl',
+  sharkName: 'sharkName',
+  description: 'description',
+  netWorth: 'netWorth',
+  portfolio: 'portfolio',
+  sectorFocus: 'sectorFocus',
+  stageFocus: 'stageFocus',
+  notableInvestments: 'notableInvestments',
+  achievements: 'achievements',
+  smLink: 'smLink',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BrokerScalarFieldEnum = {
+  id: 'id',
+  companyName: 'companyName',
+  companyLogo: 'companyLogo',
+  ratings: 'ratings',
+  reviews: 'reviews',
+  accounts: 'accounts',
+  openAccLink: 'openAccLink',
+  learnMore: 'learnMore',
+  tradingCategory: 'tradingCategory',
+  accOpenCharge: 'accOpenCharge',
+  maintainanceCharge: 'maintainanceCharge',
+  deliveryCharge: 'deliveryCharge',
+  intradayBrokerage: 'intradayBrokerage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -151,13 +222,30 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.UserRole = exports.$Enums.UserRole = {
   ADMIN: 'ADMIN',
   USER: 'USER'
 };
 
+exports.IpoStatus = exports.$Enums.IpoStatus = {
+  UPCOMING: 'UPCOMING',
+  ONGOING: 'ONGOING',
+  LISTED: 'LISTED'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Ipo: 'Ipo',
+  Blog: 'Blog',
+  Sector: 'Sector',
+  SharkInvestor: 'SharkInvestor',
+  Broker: 'Broker'
 };
 
 /**
