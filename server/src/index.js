@@ -10,6 +10,7 @@ import ipoRoutes from './routes/ipo.route.js'
 import blogRoutes from './routes/blog.route.js'
 import sectorRoutes from './routes/sector.route.js'
 import sharkInvestorRoutes from './routes/sharkInvestor.route.js'
+import brokerRoutes from './routes/broker.route.js'
 
 dotenv.config({
     path: "./.env",
@@ -34,6 +35,7 @@ app.use("/api/v1/users", ipoRoutes)
 app.use("/api/v1/users", blogRoutes)
 app.use("/api/v1/users", sectorRoutes)
 app.use("/api/v1/users", sharkInvestorRoutes)
+app.use("/api/v1/users", brokerRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
