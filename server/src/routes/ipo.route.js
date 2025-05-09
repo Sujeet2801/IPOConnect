@@ -13,7 +13,7 @@ import { ipoValidationRules } from '../validators/ipo.validate.js'
 import { validate } from '../middlewares/validate.middleware.js'
 
 const router = Router()
-1
+
 router.route("/ipo/register")
     .post(isAuthenticated, authorizeRoles("ADMIN"), ipoValidationRules(), validate, registerIpoController)
 
