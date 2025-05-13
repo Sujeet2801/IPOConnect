@@ -25,5 +25,5 @@ export const ipoValidationRules = () => {
             .isISO8601().withMessage('Listing date must be a valid date'),
         body('status')
             .notEmpty().withMessage('Status is required')
-            .isIn(['UPCOMING', 'ONGOING', 'NEWLISTED']).withMessage('Invalid IPO status'),
+            .isIn(['UPCOMING', 'ONGOING', 'LISTED']).withMessage('Invalid IPO status'),
 ]};
