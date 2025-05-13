@@ -17,7 +17,7 @@ const router = Router()
 router.route("/ipo/register")
     .post(isAuthenticated, authorizeRoles("ADMIN"), ipoValidationRules(), validate, registerIpoController)
 
-router.route("/ipo/:companyName").put(isAuthenticated, authorizeRoles("ADMIN"), updateIpoController)
+router.route("/ipo/update/:companyName").put(isAuthenticated, authorizeRoles("ADMIN"), updateIpoController)
 
 router.route("/ipo/:companyName").delete(isAuthenticated, authorizeRoles("ADMIN"), deleteIpoController)
 
