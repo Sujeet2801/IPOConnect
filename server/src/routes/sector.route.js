@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { createSectorController, 
+import { 
+    createSectorController, 
     updateSectorController, 
     getAllSectorController,
     getSectorsByMarketCapTypeController, 
     deleteSectorController, 
-    getSectorDeatail } 
-    from "../controllers/sector.controller.js";
+    getSectorDeatail 
+} from "../controllers/sector.controller.js";
 
 import { isAuthenticated } from "../middlewares/auth.middleware.js";
 import { authorizeRoles } from "../middlewares/authRole.middleware.js";
