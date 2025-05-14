@@ -66,7 +66,7 @@ const getAllSectorController = asyncHandler( async (req, res) => {
     return res.status(201).json(new ApiResponse(201, {existingSector}, "All sector fetched successfully"))
 })
 
-const getSectorsByMarketCapTypeController = asyncHandler(async (req, res) => {
+const getSectorsByMarketCapTypeController = asyncHandler( async (req, res) => {
 
     const { type } = req.params;
     console.log(type);
@@ -97,6 +97,21 @@ const getSectorsByMarketCapTypeController = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, { filteredData }, `Sectors with ${type} market cap data fetched successfully`));
 });
 
+const getSectorDeatail = asyncHandler( async (req, res) => {
+
+    const { sectorName } = req.params;
+    if(sectorName === undefined){
+        throw new ApiError(400, "Sector name should not be undefined")
+    }
+
+    const existingSector = await db.sector.findUnique({ where: { sectorName }});
+    if(!existingSector){
+        throw new ApiError(404, "Sector not found");
+    }
+
+    return res.status(200).json(new ApiResponse(200, existingSector, "Specific sector detail fetched"))
+})
+
 const deleteSectorController = asyncHandler(async (req, res) => {
 
     let { sectorName } = req.params;
@@ -117,5 +132,6 @@ export {
     updateSectorController,
     getAllSectorController,
     getSectorsByMarketCapTypeController,
+    getSectorDeatail,
     deleteSectorController
 }
