@@ -12,7 +12,7 @@ const AuthModal = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const esc = (e) => e.key === "Escape" && navigate("/");
+        const esc = (e) => e.key === "Escape" && navigate("/ipos");
         window.addEventListener("keydown", esc);
         return () => window.removeEventListener("keydown", esc);
     }, [navigate]);
@@ -40,7 +40,7 @@ const AuthModal = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-xl shadow-lg p-8 max-w-sm w-full relative">
                 <button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/ipos")}
                     className="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-xl"
                     >
                     &times;
@@ -114,8 +114,9 @@ const LoginForm = ({ onSubmit, loading, setLoading }) => {
             <button
                 type="submit"
                 disabled={loading}
-                className={`bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
+                className={`bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 cursor-pointer 
+                ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
             >
                 {loading ? "Logging in..." : "Login"}
