@@ -14,4 +14,10 @@ export const resendVerifyEmail = (data) => API.post("/resendverifyemail", data);
 export const forgotPasswordRequest = (data) => API.post("/passwordresetrequest", data);
 export const resetPassword = (token, data) => API.post(`/reset-password/${token}`, data);
 
+// ---------- Blog APIs ------- //
+export const fetchAllBlogs = () => API.get("/blogs");
+export const createBlog = (data) => API.post("/blog", data);
+export const updateBlog = (titleParams, data) => API.put(`/blog/${titleParams}`, data);
+export const deleteBlog = (title) => API.delete(`/blog/${title}`);
+
 export default API;
