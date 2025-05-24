@@ -27,4 +27,12 @@ export const deleteIpo = (companyName) => API.delete(`/ipo/${companyName}`);
 export const fetchAllIpos = () => API.get('/ipos');
 export const fetchIposByStatus = (status) => API.get('/ipo/by-status', { params: { status } });
 
+// --------- Sector APIs ------- //
+export const createSector = (data) => API.post('/sector', data);
+export const updateSector = (sectorNameFromParams, data) => API.put(`/sector/${sectorNameFromParams}`, data);
+export const deleteSector = (sectorName) => API.delete(`/sector/${sectorName}`);
+export const fetchAllSectors = () => API.get('/sectors');
+export const fetchSectorDetail = (sectorName) => API.get(`/sectors/${sectorName}`);
+export const fetchSectorsByMarketCap = (type) => API.get(`/sectors/marketcaps/${type}`);
+
 export default API;
