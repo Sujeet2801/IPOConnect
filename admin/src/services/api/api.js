@@ -20,4 +20,11 @@ export const createBlog = (data) => API.post("/blog", data);
 export const updateBlog = (titleParams, data) => API.put(`/blog/${titleParams}`, data);
 export const deleteBlog = (title) => API.delete(`/blog/${title}`);
 
+// ---------- IPO APIs --------- //
+export const registerIpo = (data) => API.post('/ipo/register', data);
+export const updateIpo = (companyName, data) => API.put(`/ipo/update/${companyName}`, data);
+export const deleteIpo = (companyName) => API.delete(`/ipo/${companyName}`);
+export const fetchAllIpos = () => API.get('/ipos');
+export const fetchIposByStatus = (status) => API.get('/ipo/by-status', { params: { status } });
+
 export default API;
