@@ -14,6 +14,10 @@ import AllSectors from "./pages/Sector/AllSector";
 import AddSector from "./pages/Sector/AddSector";
 import UpdateSector from "./pages/Sector/UpdateSector";
 
+import SharkInvestorPage from "./pages/SharkInvestor/SharkInvestorPage";
+import AddSharkInvestor from "./pages/SharkInvestor/addSharkInvestor";
+import UpdateSharkInvestor from "./pages/SharkInvestor/UpdateSharkInvestor";
+
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +37,10 @@ function App() {
             <Route path="/sectors" element={<AllSectors />} />
             <Route path="/sector/add" element={<AddSector />} />
             <Route path="/sector/:sectorName" element={<UpdateSector />} />
+
+            <Route path="/shark-investors" element={<SharkInvestorPage />} />
+            <Route path="/shark-investor/add" element={<AddSharkInvestor />} />
+            <Route path="/shark-investor/edit/:sharkName" element={<UpdateSharkInvestor />} />
             
           </Route>
 
