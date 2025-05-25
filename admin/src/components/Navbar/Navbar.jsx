@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { useAuth } from '../../hooks/useAuth';
-import Container from '../Container/Container';
 
 const Navbar = () => {
     
@@ -13,7 +12,7 @@ const Navbar = () => {
     };
 
     return (
-        <Container className="bg-white border-b shadow-sm px-6 py-4 flex justify-between items-center">
+        <div className="bg-white border-b shadow-sm px-6 py-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-800 tracking-tight">IPOConnect Admin</h1>
         {user ? (
             <Button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onClick={handleLogout}>
@@ -24,7 +23,7 @@ const Navbar = () => {
             Login
             </Button>
         )}
-        </Container>
+        </div>
     );
 };
 
