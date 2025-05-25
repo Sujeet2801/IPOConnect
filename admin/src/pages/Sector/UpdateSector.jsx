@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchAllSectors, updateSector } from "../../services/api/api";
-import Container from "../../components/Container/Container";
 
 function UpdateSector() {
     const { sectorName } = useParams();
@@ -125,11 +124,11 @@ function UpdateSector() {
     };
 
     if (loading) {
-        return <Container className="py-8 text-center text-gray-500">Loading sector details...</Container>;
+        return <div className="py-8 text-center text-gray-500">Loading sector details...</div>;
     }
 
     if (!sector) {
-        return <Container className="py-8 text-center text-gray-500">Sector not found.</Container>;
+        return <div className="py-8 text-center text-gray-500">Sector not found.</div>;
     }
 
     const renderMarketCapInputs = (type) => {
@@ -180,7 +179,7 @@ function UpdateSector() {
     };
 
     return (
-        <Container className="py-8 space-y-8">
+        <div className="py-8 space-y-8">
             <h1 className="text-3xl font-bold text-gray-800">Edit {sector.sectorName}</h1>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -264,7 +263,7 @@ function UpdateSector() {
                     {submitting ? "Updating..." : "Update Sector"}
                 </button>
             </form>
-        </Container>
+        </div>
     );
 }
 
