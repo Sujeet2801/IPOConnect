@@ -35,11 +35,18 @@ export const fetchAllSectors = () => API.get('/sectors');
 export const fetchSectorDetail = (sectorName) => API.get(`/sectors/${sectorName}`);
 export const fetchSectorsByMarketCap = (type) => API.get(`/sectors/marketcaps/${type}`);
 
-// Shark Investor API
+// --------- Shark Investor API --------- //
 export const createSharkInvestor = (data) => API.post('/shark-investors', data);
 export const updateSharkInvestor = (sharkNameFromParams, data) => API.put(`/shark-investors/${sharkNameFromParams}`, data);
 export const deleteSharkInvestor = (sharkName) => API.delete(`/shark-investors/${sharkName}`);
 export const fetchAllSharkInvestors = () => API.get('/shark-investors');
 export const fetchSharkInvestorDetail = (sharkName) => API.get(`/shark-investors/${sharkName}`);
+
+// --------- Broker API --------- //
+export const createBroker = (data) => API.post('/broker', data);
+export const updateBroker = (companyNameParam, data) => API.put(`/broker/${companyNameParam}`, data);
+export const deleteBroker = (companyName) => API.delete(`/broker/${companyName}`);
+export const fetchAllBrokers = () => API.get('/brokers');
+export const fetchBrokerDetail = (companyName) => API.put(`/broker/${companyName}`);
 
 export default API;
