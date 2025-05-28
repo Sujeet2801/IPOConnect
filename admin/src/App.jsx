@@ -3,6 +3,7 @@ import Layout from "./components/Layout/Layout";
 import { AuthProvider } from "./hooks/useAuth";
 
 import IposPage from "./pages/Ipo/IposPage";
+
 import AddIpoPage from "./pages/Ipo/AddIpoPage";
 import EditIpoPage from "./pages/Ipo/EditIpoPage";
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/ipo/add" element={<AddIpoPage />} />
             <Route path="/ipo/edit/:companySlug" element={<EditIpoPage />} />
 
+
             <Route path="/blogs" element={<Blog />} />
             <Route path="blog/edit/:titleSlug" element={<UpdateBlog />} />
             <Route path="/blog/create" element={<AddBlog />} />
@@ -49,11 +51,12 @@ function App() {
             <Route path="/brokers" element={<BrokerPage />} />
             <Route path="/broker/add" element={<AddBrokerPage />} />
             <Route path="/broker/edit/:companyName" element={<UpdateBrokerPage />} />
-            
+
           </Route>
 
           <Route path="/login" element={<Layout />} />
           <Route path="/register" element={<Layout />} />
+
         </Routes>
       </AuthProvider>
     </BrowserRouter>
