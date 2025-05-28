@@ -16,7 +16,7 @@ import AddSector from "./pages/Sector/AddSector";
 import UpdateSector from "./pages/Sector/UpdateSector";
 
 import SharkInvestorPage from "./pages/SharkInvestor/SharkInvestorPage";
-import AddSharkInvestor from "./pages/SharkInvestor/addSharkInvestor";
+import AddSharkInvestor from "./pages/SharkInvestor/AddSharkInvestor";
 import UpdateSharkInvestor from "./pages/SharkInvestor/UpdateSharkInvestor";
 
 import BrokerPage from "./pages/Broker/BrokerPage";
