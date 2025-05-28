@@ -18,6 +18,10 @@ import SharkInvestorPage from "./pages/SharkInvestor/SharkInvestorPage";
 import AddSharkInvestor from "./pages/SharkInvestor/addSharkInvestor";
 import UpdateSharkInvestor from "./pages/SharkInvestor/UpdateSharkInvestor";
 
+import BrokerPage from "./pages/Broker/BrokerPage";
+import AddBrokerPage from "./pages/Broker/AddBrokerPage";
+import UpdateBrokerPage from "./pages/Broker/UpdateBrokerPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -41,6 +45,10 @@ function App() {
             <Route path="/shark-investors" element={<SharkInvestorPage />} />
             <Route path="/shark-investor/add" element={<AddSharkInvestor />} />
             <Route path="/shark-investor/edit/:sharkName" element={<UpdateSharkInvestor />} />
+  
+            <Route path="/brokers" element={<BrokerPage />} />
+            <Route path="/broker/add" element={<AddBrokerPage />} />
+            <Route path="/broker/edit/:companyName" element={<UpdateBrokerPage />} />
             
           </Route>
 
