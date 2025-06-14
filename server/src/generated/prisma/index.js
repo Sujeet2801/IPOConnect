@@ -231,7 +231,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/workspaces/IPOConnect/server/src/generated/prisma",
+      "value": "/workspaces/IPOConnect-website/server/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -242,10 +242,14 @@ const config = {
         "fromEnvVar": null,
         "value": "debian-openssl-1.1.x",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/workspaces/IPOConnect/server/prisma/schema.prisma",
+    "sourceFilePath": "/workspaces/IPOConnect-website/server/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -259,16 +263,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:cNtFfyzOGdKUbyGGcQUBiSKdylyeECnq@switchback.proxy.rlwy.net:58073/railway"
+        "value": null
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// --------------------------------------\n// ENUMS\n// --------------------------------------\n\n// Defines roles assigned to users of the platform.\nenum UserRole {\n  ADMIN\n  USER\n}\n\n// Enum to track the current lifecycle stage of an IPO.\nenum IpoStatus {\n  UPCOMING\n  ONGOING\n  LISTED\n}\n\n// --------------------------------------\n// MODELS\n// --------------------------------------\n\n// Represents a registered user of the platform.\nmodel User {\n  id                      String    @id @default(uuid())\n  name                    String?\n  email                   String    @unique\n  password                String\n  phone                   String    @unique\n  isEmailVerified         Boolean   @default(false)\n  emailVerificationToken  String?\n  emailVerificationExpiry DateTime?\n  forgotPasswordToken     String?\n  forgotPasswordExpiry    DateTime?\n  refreshToken            String?\n  role                    UserRole  @default(USER)\n  createdAt               DateTime  @default(now())\n  updatedAt               DateTime  @updatedAt\n}\n\n// Represents an IPO (Initial Public Offering) listing.\nmodel Ipo {\n  id          String    @id @default(uuid())\n  companyName String    @unique\n  priceBand   String\n  openDate    DateTime\n  closeDate   DateTime\n  issueSize   String\n  issueType   String\n  listingDate DateTime\n  status      IpoStatus\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n}\n\n// The Blog model represents an individual blog post entry.\nmodel Blog {\n  id           String   @id @default(uuid())\n  title        String   @unique\n  imageUrl     String\n  publishDate  DateTime @default(now())\n  externalLink String\n}\n\n// The Sector model represents a industry sector with structured market data.\nmodel Sector {\n  id             String   @id @default(uuid())\n  sectorName     String   @unique\n  sectorDesc     String\n  marketCaps     Json\n  marketInsights Json\n  opportunities  Json\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n}\n\nmodel SharkInvestor {\n  id                 String   @id @default(uuid())\n  imageUrl           String\n  sharkName          String   @unique\n  description        String\n  netWorth           String\n  portfolio          String\n  sectorFocus        Json\n  stageFocus         Json\n  notableInvestments Json\n  achievements       Json\n  smLink             Json\n  createdAt          DateTime @default(now())\n  updatedAt          DateTime @updatedAt\n}\n\nmodel Broker {\n  id                 String   @id @default(cuid())\n  companyName        String   @unique\n  companyLogo        String\n  ratings            Float\n  reviews            Float\n  accounts           String\n  openAccLink        String\n  learnMore          String\n  tradingCategory    String[]\n  accOpenCharge      String\n  maintainanceCharge String\n  deliveryCharge     String\n  intradayBrokerage  String\n  createdAt          DateTime @default(now())\n  updatedAt          DateTime @updatedAt\n}\n",
-  "inlineSchemaHash": "d5e21fd318835a91293bc8684e1c4a64ea8a837dfe6e5c70681a8fe456160c1c",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/prisma\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// --------------------------------------\n// ENUMS\n// --------------------------------------\n\n// Defines roles assigned to users of the platform.\nenum UserRole {\n  ADMIN\n  USER\n}\n\n// Enum to track the current lifecycle stage of an IPO.\nenum IpoStatus {\n  UPCOMING\n  ONGOING\n  LISTED\n}\n\n// --------------------------------------\n// MODELS\n// --------------------------------------\n\n// Represents a registered user of the platform.\nmodel User {\n  id                      String    @id @default(uuid())\n  name                    String?\n  email                   String    @unique\n  password                String\n  phone                   String    @unique\n  isEmailVerified         Boolean   @default(false)\n  emailVerificationToken  String?\n  emailVerificationExpiry DateTime?\n  forgotPasswordToken     String?\n  forgotPasswordExpiry    DateTime?\n  refreshToken            String?\n  role                    UserRole  @default(USER)\n  createdAt               DateTime  @default(now())\n  updatedAt               DateTime  @updatedAt\n}\n\n// Represents an IPO (Initial Public Offering) listing.\nmodel Ipo {\n  id          String    @id @default(uuid())\n  companyName String    @unique\n  priceBand   String\n  openDate    DateTime\n  closeDate   DateTime\n  issueSize   String\n  issueType   String\n  listingDate DateTime\n  status      IpoStatus\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n}\n\n// The Blog model represents an individual blog post entry.\nmodel Blog {\n  id           String   @id @default(uuid())\n  title        String   @unique\n  imageUrl     String\n  publishDate  DateTime @default(now())\n  externalLink String\n}\n\n// The Sector model represents a industry sector with structured market data.\nmodel Sector {\n  id             String   @id @default(uuid())\n  sectorName     String   @unique\n  sectorDesc     String\n  marketCaps     Json\n  marketInsights Json\n  opportunities  Json\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n}\n\nmodel SharkInvestor {\n  id                 String   @id @default(uuid())\n  imageUrl           String\n  sharkName          String   @unique\n  description        String\n  netWorth           String\n  portfolio          String\n  sectorFocus        Json\n  stageFocus         Json\n  notableInvestments Json\n  achievements       Json\n  smLink             Json\n  createdAt          DateTime @default(now())\n  updatedAt          DateTime @updatedAt\n}\n\nmodel Broker {\n  id                 String   @id @default(cuid())\n  companyName        String   @unique\n  companyLogo        String\n  ratings            Float\n  reviews            Float\n  accounts           String\n  openAccLink        String\n  learnMore          String\n  tradingCategory    String[]\n  accOpenCharge      String\n  maintainanceCharge String\n  deliveryCharge     String\n  intradayBrokerage  String\n  createdAt          DateTime @default(now())\n  updatedAt          DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "36354c2dc977dee45d9043d5e38467b4551c7c15ac3a1466ffecfcc24cb017ef",
   "copyEngine": true
 }
 
@@ -309,6 +314,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
 path.join(process.cwd(), "src/generated/prisma/libquery_engine-debian-openssl-1.1.x.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/generated/prisma/schema.prisma")
